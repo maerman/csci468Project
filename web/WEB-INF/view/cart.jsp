@@ -1,126 +1,87 @@
-<%--
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
+<div id="centerColumn">
 
- * author: tgiunipero
---%>
+                <p>x items in cart.</p>
 
+                <div id="actionBar">
+                    <a href="#" class="bubble hMargin">clear cart</a>
+                    <a href="#" class="bubble hMargin">continue shopping</a>
+                    <a href="#" class="bubble hMargin">proceed to checkout</a>
+                </div>
 
-<%-- Set session-scoped variable to track the view user is coming from.
-     This is used by the language mechanism in the Controller so that
-     users view the same page when switching between English and Czech. --%>
-<c:set var="view" value="/cart" scope="session"/>
+                <h4 id="subtotal">[ subtotal: xxx ]</h4>
 
+                <table id="cartTable">
 
-<%-- HTML markup starts below --%>
+                    <tr class="header">
+                        <th>product</th>
+                        <th>name</th>
+                        <th>price</th>
+                        <th>quantity</th>
+                    </tr>
 
-<div id="singleColumn">
+                    <tr class="lightBlue">
+                        <td>
+                            <img src="#" alt="product image">
+                        </td>
+                        <td>[ product name ]</td>
+                        <td>[ price ]</td>
+                        <td>
 
-    <c:choose>
-        <c:when test="${cart.numberOfItems > 1}">
-            <p><fmt:message key="yourCartContains"/> ${cart.numberOfItems} <fmt:message key="items"/>.</p>
-        </c:when>
-        <c:when test="${cart.numberOfItems == 1}">
-            <p><fmt:message key="yourCartContains"/> ${cart.numberOfItems} <fmt:message key="item"/>.</p>
-        </c:when>
-        <c:otherwise>
-            <p><fmt:message key="yourCartEmpty"/></p>
-        </c:otherwise>
-    </c:choose>
+                            <form action="updateCart" method="post">
+                                <input type="text"
+                                       maxlength="2"
+                                       size="2"
+                                       value="1"
+                                       name="quantity">
+                                <input type="submit"
+                                       name="submit"
+                                       value="update button">
+                            </form>
+                        </td>
+                    </tr>
 
-    <div id="actionBar">
-        <%-- clear cart widget --%>
-        <c:if test="${!empty cart && cart.numberOfItems != 0}">
+                     <tr class="lightBlue">
+                        <td>
+                            <img src="#" alt="product image">
+                        </td>
+                        <td>[ product name ]</td>
+                        <td>[ price ]</td>
+                        <td>
 
-            <c:url var="url" value="viewCart">
-                <c:param name="clear" value="true"/>
-            </c:url>
+                            <form action="updateCart" method="post">
+                                <input type="text"
+                                       maxlength="2"
+                                       size="2"
+                                       value="1"
+                                       name="quantity">
+                                <input type="submit"
+                                       name="submit"
+                                       value="update button">
+                            </form>
+                        </td>
+                    </tr>
 
-            <a href="${url}" class="bubble hMargin"><fmt:message key="clearCart"/></a>
-        </c:if>
+                    <tr class="lightBlue">
+                        <td>
+                            <img src="#" alt="product image">
+                        </td>
+                        <td>[ product name ]</td>
+                        <td>[ price ]</td>
+                        <td>
 
-        <%-- continue shopping widget --%>
-        <c:set var="value">
-            <c:choose>
-                <%-- if 'selectedCategory' session object exists, send user to previously viewed category --%>
-                <c:when test="${!empty selectedCategory}">
-                    category
-                </c:when>
-                <%-- otherwise send user to welcome page --%>
-                <c:otherwise>
-                    index.jsp
-                </c:otherwise>
-            </c:choose>
-        </c:set>
+                            <form action="updateCart" method="post">
+                                <input type="text"
+                                       maxlength="2"
+                                       size="2"
+                                       value="1"
+                                       name="quantity">
+                                <input type="submit"
+                                       name="submit"
+                                       value="update button">
+                            </form>
+                        </td>
+                    </tr>
 
-        <c:url var="url" value="${value}"/>
-        <a href="${url}" class="bubble hMargin"><fmt:message key="continueShopping"/></a>
+                </table>
 
-        <%-- checkout widget --%>
-        <c:if test="${!empty cart && cart.numberOfItems != 0}">
-            <a href="<c:url value='checkout'/>" class="bubble hMargin"><fmt:message key="proceedCheckout"/></a>
-        </c:if>
-    </div>
-
-    <c:if test="${!empty cart && cart.numberOfItems != 0}">
-
-      <h4 id="subtotal"><fmt:message key="subtotal"/>:
-          <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cart.subtotal}"/>
-      </h4>
-
-      <table id="cartTable">
-
-        <tr class="header">
-            <th><fmt:message key="product"/></th>
-            <th><fmt:message key="name"/></th>
-            <th><fmt:message key="price"/></th>
-            <th><fmt:message key="quantity"/></th>
-        </tr>
-
-        <c:forEach var="cartItem" items="${cart.items}" varStatus="iter">
-
-          <c:set var="product" value="${cartItem.product}"/>
-
-          <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
-            <td>
-                <img src="${initParam.productImagePath}${product.name}.png"
-                     alt="<fmt:message key="${product.name}"/>">
-            </td>
-
-            <td><fmt:message key="${product.name}"/></td>
-
-            <td>
-                <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cartItem.total}"/>
-                <br>
-                <span class="smallText">(
-                    <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/>
-                    / <fmt:message key="unit"/> )</span>
-            </td>
-
-            <td>
-                <form action="<c:url value='updateCart'/>" method="post">
-                    <input type="hidden"
-                           name="productId"
-                           value="${product.id}">
-                    <input type="text"
-                           maxlength="2"
-                           size="2"
-                           value="${cartItem.quantity}"
-                           name="quantity"
-                           style="margin:5px">
-                    <input type="submit"
-                           name="submit"
-                           value="<fmt:message key='update'/>">
-                </form>
-            </td>
-          </tr>
-
-        </c:forEach>
-
-      </table>
-
-    </c:if>
-</div>
+            </div>
