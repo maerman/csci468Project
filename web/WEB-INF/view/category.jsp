@@ -17,23 +17,15 @@
             </div>
 
             <div id="categoryRightColumn">
-                <div>
-                <a href="#" class="subCategory"><span>[ subcategory ] </span></a>
-                <a href="#" class="subCategory"><span>[ subcategory ] </span></a>
-                <a href="#" class="subCategory"><span>[ subcategory ] </span></a>
-                <a href="#" class="subCategory"><span>[ subcategory ] </span></a>
-                <a href="#" id="selectedSubCategory" class="subCategory"><span>[ top items ] </span></a>
-                </div>
-
                 <table id="productTable">
                     <tr class="lightBlue">
                         <td>
                             <img src="#" alt="product image">
                         </td>
                         <td>
-                            [ product name ]
-                            <br>
-                            <span class="smallText">[ product description ]</span>
+                            <a href="#">
+                                [ product name ]
+                            </a>
                         </td>
                         <td>[ price ]</td>
                         <td>
@@ -48,9 +40,9 @@
                             <img src="#" alt="product image">
                         </td>
                         <td>
-                            [ product name ]
-                            <br>
-                            <span class="smallText">[ product description ]</span>
+                            <a href="#">
+                                [ product name ]
+                            </a>
                         </td>
                         <td>[ price ]</td>
                         <td>
@@ -65,9 +57,9 @@
                             <img src="#" alt="product image">
                         </td>
                         <td>
-                            [ product name ]
-                            <br>
-                            <span class="smallText">[ product description ]</span>
+                            <a href="#">
+                                [ product name ]
+                            </a>
                         </td>
                         <td>[ price ]</td>
                         <td>
@@ -82,9 +74,9 @@
                             <img src="#" alt="product image">
                         </td>
                         <td>
-                            [ product name ]
-                            <br>
-                            <span class="smallText">[ product description ]</span>
+                            <a href="#">
+                                [ product name ]
+                            </a>
                         </td>
                         <td>[ price ]</td>
                         <td>

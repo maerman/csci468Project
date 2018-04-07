@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
                            "/create",
                            "/edit",
                            "/confirmation",
+                           "/product",
                            "/chooseLanguage"})
 public class ControllerServlet extends HttpServlet {
 
@@ -89,6 +90,10 @@ public class ControllerServlet extends HttpServlet {
         // if account edit page is requested
         } else if (userPath.equals("/edit")) {
             // TODO: Implement account edit page request
+
+        // if product page is requested
+        } else if (userPath.equals("/product")) {
+            // TODO: Implement product page request
 
         // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
