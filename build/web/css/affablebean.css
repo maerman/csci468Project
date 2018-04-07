@@ -21,11 +21,17 @@ table {
     border: solid 1px #f5eabe;
 }
 
+<<<<<<< HEAD
 td{border-bottom: 1px solid black;}
 
 
 /* general styles */
 #main { background: #aaa }
+=======
+
+/* general styles */
+#main { background: #eee }
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 
 #singleColumn {
     margin: 20px 30px;
@@ -179,6 +185,21 @@ td{border-bottom: 1px solid black;}
 #selectedCategory {
     background: #aaa;
     width: 200px;
+<<<<<<< HEAD
+=======
+}
+
+.subCategory {
+    margin: 0px 10px 0 0;
+    font-size: large;
+    float: right;
+    display: block;
+    background: #ccc;
+}
+
+#selectedSubCategory {
+    background: #aaa;
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 }
 
 .categoryText {
@@ -190,40 +211,57 @@ td{border-bottom: 1px solid black;}
 
 #productTable tr { height: 90px }
 
-#productTable td { width: 145px }
+#productTable td { width: 145px;
+border-bottom: 1px solid black;}
 
 
 /* cart page styles */
 #actionBar {
-    margin: 30px;
-    width: 750px;
+    margin: 20px;
+    width: 900px;
     text-align: center;
 }
 
-#subtotal { margin: 40px 0 20px 430px }
+#subtotal { margin: 20px 0 10px 650px }
 
-#cartTable { width: 750px }
+#cartTable { width: 905px }
 
 #cartTable td {
     width: 145px;
     height: 90px;
 }
 
-
 /* checkout page styles */
 #checkoutTable {
+<<<<<<< HEAD
     width: 360px;
+=======
+    width: 425px;
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
     background-color: #f5eabe;
     float: left;
     height: 280px;
 }
 
 #infoBox {
+<<<<<<< HEAD
     width: 300px;
+=======
+    width: 425px;
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
     padding-left: 30px;
     float: left;
 }
 
+<<<<<<< HEAD
+=======
+#infoBoxDiv{
+    border: black solid 1px;
+    height:100px;
+    padding: 10px
+}
+
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 #priceBox {
     padding: 10px;
     margin: 10px 0;
@@ -231,6 +269,18 @@ td{border-bottom: 1px solid black;}
     background-color: #c3e3e0;
 }
 
+<<<<<<< HEAD
+=======
+.fieldBoxTitle{
+    float: left;
+    width: 100px;
+}
+
+.fieldBox{
+    width: 275px;
+    float: right;
+}
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 
 /* confirmation page styles */
 #confirmationText {
@@ -238,11 +288,15 @@ td{border-bottom: 1px solid black;}
     padding: 10px;
     background-color: #f5eabe;
     float: left;
+<<<<<<< HEAD
     width:540px;
+=======
+    width: 780px;
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 }
 
 .summaryColumn {
-    margin-top: 15px;
+    margin-top: 5px;
     width: 50%;
     float: left;
 }
@@ -251,6 +305,10 @@ td{border-bottom: 1px solid black;}
     width: 100%;
     text-align: left;
     height: 200px;
+<<<<<<< HEAD
+=======
+    margin-bottom: 15px;
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 }
 
 #deliveryAddressTable {
@@ -258,6 +316,10 @@ td{border-bottom: 1px solid black;}
     margin-left: 15%;
     text-align: left;
     height: 200px;
+<<<<<<< HEAD
+=======
+    margin-bottom: 15px;
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 }
 
 /* review page styles */
@@ -269,6 +331,7 @@ td{border-bottom: 1px solid black;}
     margin-bottom: 40px;
     margin-right: 15px;
     overflow: scroll;
+<<<<<<< HEAD
 }
 .reviewRightColumn{
     background: #ccc;
@@ -349,4 +412,54 @@ td{border-bottom: 1px solid black;}
     float: right;
     margin-top: 70px;
     margin-right: 150px;
+=======
+}
+.reviewRightColumn{
+    background: #ccc;
+    width: 450px;
+    float: left;
+    margin-bottom: 25px;
+}
+
+#review{
+    height: 200px;
+    width: 400px;
+}
+/* account page styles */
+#signInBox{
+    background: #aaa;
+    height: 150px;
+    margin-top: -5px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.accountButtons{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* account create/edit page styles */
+
+.accountSetting{
+    background: #aaa;
+    height: 250px;
+    margin-top: -5px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+/* help/about/contact page styles */
+.miscInfoBox{
+    background: #aaa;
+    margin-top: -5px;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 350px;
+    overflow: scroll;
+}
+
+.infoText{
+    float: left
+>>>>>>> 7f83a0f0e64edca49e84d815891b1cd8c000b5c2
 }
