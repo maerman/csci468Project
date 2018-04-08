@@ -9,11 +9,11 @@ import entity.Category;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
+import javax.ejb.EJB;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import session.CategoryFacade;
 
 /**
@@ -39,10 +39,13 @@ import session.CategoryFacade;
                            "/product",
                            "/chooseLanguage"})
 public class ControllerServlet extends HttpServlet {
+
     @EJB
     private CategoryFacade categoryFacade;
 
-    public void init() throws ServletException {
+    @Override
+    public void init(ServletConfig servletConfig) throws ServletException {
+        super.init(servletConfig);
 
         // store category list in servlet context
         getServletContext().setAttribute("categories", categoryFacade.findAll());
@@ -179,8 +182,9 @@ public class ControllerServlet extends HttpServlet {
         }
     }
 
-    private Object getServletContext() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+
+    //private Object getServletContext() {
+       // throw new UnsupportedOperationException("Not yet implemented");
+   // }
 
 }
