@@ -17,6 +17,7 @@
             </div>
 
             <div id="categoryRightColumn">
+                <p style="background-color: #f5eabe; padding: 7px;">${selectedCategory.name}</p>
                 <table id="productTable">
                     <tr class="lightBlue">
                         <td>
