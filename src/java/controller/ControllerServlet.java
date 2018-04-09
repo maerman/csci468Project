@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import session.CategoryFacade;
+import sun.security.util.Debug;
 
 /**
  *
@@ -64,6 +65,7 @@ public class ControllerServlet extends HttpServlet {
 
         String userPath = request.getServletPath();
         Category selectedCategory;
+        String selectedProductID = "2";
         Collection<Product> categoryProducts;
 
         // if category page is requested
@@ -126,7 +128,8 @@ public class ControllerServlet extends HttpServlet {
 
         // if product page is requested
         } else if (userPath.equals("/product")) {
-            // TODO: Implement product page request
+            String temp = request.getQueryString();
+            selectedProductID = temp;
 
         // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
