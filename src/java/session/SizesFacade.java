@@ -10,6 +10,7 @@ package session;
 
 import entity.Sizes;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
