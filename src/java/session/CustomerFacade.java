@@ -1,9 +1,6 @@
 /*
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 package session;
@@ -21,7 +18,7 @@ import javax.persistence.PersistenceContext;
 public class CustomerFacade extends AbstractFacade<Customer> {
     @PersistenceContext(unitName = "AffableBeanPU")
     private EntityManager em;
-@Override
+
     protected EntityManager getEntityManager() {
         return em;
     }

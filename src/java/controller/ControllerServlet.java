@@ -5,17 +5,24 @@
 
 package controller;
 
+import cart.ShoppingCart;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import session.CategoryFacade;
-import sun.security.util.Debug;
+import session.OrderManager;
+import session.ProductFacade;
+import validate.Validator;
 
 /**
  *
@@ -29,24 +36,25 @@ import sun.security.util.Debug;
                            "/updateCart",
                            "/checkout",
                            "/purchase",
-                           "/review",
-                           "/help",
-                           "/about",
-                           "/contact",
-                           "/login",
-                           "/create",
-                           "/edit",
-                           "/confirmation",
-                           "/product",
                            "/chooseLanguage"})
 public class ControllerServlet extends HttpServlet {
 
+    private String surcharge;
+
     @EJB
     private CategoryFacade categoryFacade;
+    @EJB
+    private ProductFacade productFacade;
+    @EJB
+    private OrderManager orderManager;
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
+
         super.init(servletConfig);
+
+        // initialize servlet with configuration information
+        surcharge = servletConfig.getServletContext().getInitParameter("deliverySurcharge");
 
         // store category list in servlet context
         getServletContext().setAttribute("categories", categoryFacade.findAll());
@@ -61,75 +69,59 @@ public class ControllerServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
         Category selectedCategory;
-        String selectedProductID = "2";
         Collection<Product> categoryProducts;
 
         // if category page is requested
         if (userPath.equals("/category")) {
-            // TODO: Implement category request
-             // get categoryId from request
+
+            // get categoryId from request
             String categoryId = request.getQueryString();
 
             if (categoryId != null) {
+
                 // get selected category
                 selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
 
-                // place selected category in request scope
-                request.setAttribute("selectedCategory", selectedCategory);
+                // place selected category in session scope
+                session.setAttribute("selectedCategory", selectedCategory);
 
                 // get all products for selected category
                 categoryProducts = selectedCategory.getProductCollection();
 
-                // place category products in request scope
-                request.setAttribute("categoryProducts", categoryProducts);
+                // place category products in session scope
+                session.setAttribute("categoryProducts", categoryProducts);
             }
 
-        // if item review page is requested
-        } else if (userPath.equals("/review")) {
-            // TODO: Implement item review page request
 
         // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
-            // TODO: Implement cart page request
+
+            String clear = request.getParameter("clear");
+
+            if ((clear != null) && clear.equals("true")) {
+
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+                cart.clear();
+            }
 
             userPath = "/cart";
 
+
         // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
-            // TODO: Implement checkout page request
 
-        // if help page is requested
-        } else if (userPath.equals("/help")) {
-            // TODO: Implement help page request
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 
-        // if about page is requested
-        } else if (userPath.equals("/about")) {
-            // TODO: Implement about page request
+            // calculate total
+            cart.calculateTotal(surcharge);
 
-        // if contact page is requested
-        } else if (userPath.equals("/contact")) {
-            // TODO: Implement contact page request
+            // forward to checkout page and switch to a secure channel
 
-        // if account page is requested
-        } else if (userPath.equals("/login")) {
-            // TODO: Implement login page request
-
-        // if account creation page is requested
-        } else if (userPath.equals("/create")) {
-            // TODO: Implement account creation page request
-
-        // if account edit page is requested
-        } else if (userPath.equals("/edit")) {
-            // TODO: Implement account edit page request
-
-        // if product page is requested
-        } else if (userPath.equals("/product")) {
-            String temp = request.getQueryString();
-            selectedProductID = temp;
 
         // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
@@ -147,6 +139,7 @@ public class ControllerServlet extends HttpServlet {
         }
     }
 
+
     /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
@@ -156,23 +149,111 @@ public class ControllerServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");  // ensures that user input is interpreted as
+                                                // 8-bit Unicode (e.g., for Czech characters)
 
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        Validator validator = new Validator();
 
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
-            // TODO: Implement add product to cart action
+
+            // if user is adding item to cart for first time
+            // create cart object and attach it to user session
+            if (cart == null) {
+
+                cart = new ShoppingCart();
+                session.setAttribute("cart", cart);
+            }
+
+            // get user input from request
+            String productId = request.getParameter("productId");
+
+            if (!productId.isEmpty()) {
+
+                Product product = productFacade.find(Integer.parseInt(productId));
+                cart.addItem(product);
+            }
+
+            userPath = "/category";
+
 
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
-            // TODO: Implement update cart action
+
+            // get input from request
+            String productId = request.getParameter("productId");
+            String quantity = request.getParameter("quantity");
+
+            boolean invalidEntry = validator.validateQuantity(productId, quantity);
+
+                if (!invalidEntry) {
+
+                Product product = productFacade.find(Integer.parseInt(productId));
+                cart.update(product, quantity);
+            }
+
+            userPath = "/cart";
+
 
         // if purchase action is called
         } else if (userPath.equals("/purchase")) {
-            // TODO: Implement purchase action
 
-            userPath = "/confirmation";
+            if (cart != null) {
+
+                // extract user data from request
+                String name = request.getParameter("name");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                String address = request.getParameter("address");
+                String cityRegion = request.getParameter("cityRegion");
+                String ccNumber = request.getParameter("creditcard");
+
+                // validate user data
+                boolean validationErrorFlag = false;
+                validationErrorFlag = validator.validateForm(name, email, phone, address, cityRegion, ccNumber, request);
+
+                // if validation error found, return user to checkout
+                if (validationErrorFlag == true) {
+                    request.setAttribute("validationErrorFlag", validationErrorFlag);
+                    userPath = "/checkout";
+
+                    // otherwise, save order to database
+                } else {
+
+                    int orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
+
+                    // if order processed successfully send user to confirmation page
+                    if (orderId != 0) {
+
+                        // dissociate shopping cart from session
+                        cart = null;
+
+                        // end session
+                        session.invalidate();
+
+                        // get order details
+                        Map orderMap = orderManager.getOrderDetails(orderId);
+
+                        // place order details in request scope
+                        request.setAttribute("customer", orderMap.get("customer"));
+                        request.setAttribute("products", orderMap.get("products"));
+                        request.setAttribute("orderRecord", orderMap.get("orderRecord"));
+                        request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
+
+                        userPath = "/confirmation";
+
+                    // otherwise, send back to checkout page and display error
+                    } else {
+                        userPath = "/checkout";
+                        request.setAttribute("orderFailureFlag", true);
+                    }
+                }
+            }
         }
 
         // use RequestDispatcher to forward request internally
@@ -184,10 +265,5 @@ public class ControllerServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
-
-
-    //private Object getServletContext() {
-       // throw new UnsupportedOperationException("Not yet implemented");
-   // }
 
 }
