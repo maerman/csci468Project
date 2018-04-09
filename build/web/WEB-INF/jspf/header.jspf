@@ -32,9 +32,9 @@
                     </div>
                 </div>
 
-                <a href="#">
-                    <img src="#" id="logo" alt="logo">
+                <a href="/AffableBean/">
+                    <img src="/AffableBean/img/logo.png" id="logo" alt="logo">
                 </a>
 
-                <img src="#" id="logoText" alt="title">
+                <img src="/AffableBean/img/ambient.png" id="logoText" alt="title">
             </div>

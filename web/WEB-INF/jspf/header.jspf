@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <a href="<c:url value='/'/>">
+                <a href="/AffableBean/">
                     <img src="/AffableBean/img/logo.png" id="logo" alt="logo">
                 </a>
 
