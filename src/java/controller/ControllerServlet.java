@@ -210,12 +210,14 @@ public class ControllerServlet extends HttpServlet {
                 String email = request.getParameter("email");
                 String phone = request.getParameter("phone");
                 String address = request.getParameter("address");
-                String cityRegion = request.getParameter("cityRegion");
+                String city = request.getParameter("city");
+                String state = request.getParameter("state");
+                String zipcode = request.getParameter("zipcode");
                 String ccNumber = request.getParameter("creditcard");
 
                 // validate user data
                 boolean validationErrorFlag = false;
-                validationErrorFlag = validator.validateForm(name, email, phone, address, cityRegion, ccNumber, request);
+                validationErrorFlag = validator.validateForm(name, email, phone, address, city, state, zipcode, ccNumber, request);
 
                 // if validation error found, return user to checkout
                 if (validationErrorFlag == true) {
@@ -225,7 +227,7 @@ public class ControllerServlet extends HttpServlet {
                     // otherwise, save order to database
                 } else {
 
-                    int orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
+                    int orderId = orderManager.placeOrder(name, email, phone, address, city, state, zipcode, ccNumber, cart);
 
                     // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
