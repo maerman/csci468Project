@@ -8,14 +8,14 @@
 <div id="singleColumn">
 
     <p id="confirmationText">
-        <strong>Your order has been successfully processed and will be delivered within 24 hours.</strong>
+        <strong>Your order has been successfully processed and will be delivered within 3-5 business days.</strong>
         <br><br>
         Please keep a note of your confirmation number:
         <strong>${orderRecord.confirmationNumber}</strong>
         <br>
         If you have a query concerning your order, feel free to <a href="#">contact us</a>.
         <br><br>
-        Thank you for shopping at the Affable Bean Green Grocer!
+        Thank you for shopping at the Ambiance Candles!
     </p>
 
     <div class="summaryColumn" >
@@ -49,12 +49,12 @@
 
             <tr class="lightBlue">
                 <td colspan="2" id="deliverySurchargeCellLeft"><strong>delivery surcharge:</strong></td>
-                <td id="deliverySurchargeCellRight">&euro; ${initParam.deliverySurcharge}</td>
+                <td id="deliverySurchargeCellRight">&#036; ${initParam.deliverySurcharge}</td>
             </tr>
 
             <tr class="lightBlue">
                 <td colspan="2" id="totalCellLeft"><strong>total:</strong></td>
-                <td id="totalCellRight">&euro; ${orderRecord.amount}</td>
+                <td id="totalCellRight">&#036; ${orderRecord.amount}</td>
             </tr>
 
             <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>

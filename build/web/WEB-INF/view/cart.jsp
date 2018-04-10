@@ -55,7 +55,7 @@
 
     <c:if test="${!empty cart && cart.numberOfItems != 0}">
 
-      <h4 id="subtotal">subtotal: &euro; ${cart.subtotal}</h4>
+      <h4 id="subtotal">subtotal: &#036; ${cart.subtotal}</h4>
 
       <table id="cartTable">
 

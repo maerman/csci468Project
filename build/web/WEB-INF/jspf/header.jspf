@@ -151,8 +151,8 @@
                 </div>
 
                 <a href="<c:url value='/'/>">
-                    <img src="img/logo.png" id="logo" alt="Affable Bean logo">
+                    <img src="img/logo.png" id="logo" alt="Ambiance logo">
                 </a>
 
-                <img src="img/logoText.png" id="logoText" alt="the affable bean">
+                <img src="img/ambient.png" id="logoText" alt="ambiance">
             </div>
