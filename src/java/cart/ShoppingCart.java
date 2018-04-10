@@ -161,8 +161,7 @@ public class ShoppingCart {
         double s = Double.parseDouble(surcharge);
 
         amount = this.getSubtotal();
-        amount += s;
-
+        if(amount < 50) amount += s;
         total = amount;
     }
 
