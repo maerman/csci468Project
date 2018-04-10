@@ -25,9 +25,22 @@
                 address: {
                     required: true
                 },
-                creditcard: {
+                city: {
+                    required: true
+                },
+                state: {
                     required: true,
-                    creditcard: true
+                    minlength: 2
+
+                },
+                zipcode: {
+                    required: true,
+                    minlength: 5
+
+                },
+                creditcard: {
+                    required: true
+
                 }
             }
         });
@@ -58,13 +71,19 @@
                         <br><span class="indent"><strong>email</strong> (e.g., b.baggins@hobbit.com)</span>
                       </c:if>
                       <c:if test="${!empty phoneError}">
-                        <br><span class="indent"><strong>phone</strong> (e.g., 222333444)</span>
+                        <br><span class="indent"><strong>phone</strong> (e.g., 7168546654)</span>
                       </c:if>
                       <c:if test="${!empty addressError}">
-                        <br><span class="indent"><strong>address</strong> (e.g., Korunní 56)</span>
+                        <br><span class="indent"><strong>address</strong> (e.g., 140 Goethe St.)</span>
                       </c:if>
-                      <c:if test="${!empty cityRegionError}">
-                        <br><span class="indent"><strong>city region</strong> (e.g., 2)</span>
+                      <c:if test="${!empty cityError}">
+                        <br><span class="indent"><strong>city</strong> (e.g., Buffalo)</span>
+                      </c:if>
+                      <c:if test="${!empty stateError}">
+                        <br><span class="indent"><strong>state</strong> (e.g., NY)</span>
+                      </c:if>
+                      <c:if test="${!empty zipcodeError}">
+                        <br><span class="indent"><strong>zipcode</strong> (e.g., 14215)</span>
                       </c:if>
                       <c:if test="${!empty ccNumberError}">
                         <br><span class="indent"><strong>credit card</strong> (e.g., 1111222233334444)</span>
@@ -116,15 +135,42 @@
                            id="address"
                            name="address"
                            value="${param.address}">
-
-                    <br>
-                    prague
-                    <select name="cityRegion">
-                      <c:forEach begin="1" end="10" var="regionNumber">
-                        <option value="${regionNumber}"
-                                <c:if test="${param.cityRegion eq regionNumber}">selected</c:if>>${regionNumber}</option>
-                      </c:forEach>
-                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="city">city:</label></td>
+                <td class="inputField" style="text-align:left;">
+                    <input type="text"
+                           size="15"
+                           maxlength="15"
+                           style="text-align:left;"
+                           id="city"
+                           name="city"
+                           value="${param.city}">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="state">state:</label></td>
+                <td class="inputField" style="text-align:left;">
+                    <input type="text"
+                           size="2"
+                           style="text-align:left;"
+                           maxlength="2"
+                           id="state"
+                           name="state"
+                           value="${param.state}">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="zipcode">zip:</label></td>
+                <td class="inputField" style="text-align:left;">
+                    <input type="text"
+                           size="5"
+                           maxlength="5"
+                           style="text-align:left;"
+                           id="zipcode"
+                           name="zipcode"
+                           value="${param.zipcode}">
                 </td>
             </tr>
             <tr>
@@ -149,26 +195,34 @@
     <div id="infoBox">
 
         <ul>
-            <li>Next-day delivery is guaranteed</li>
-            <li>A &euro; ${initParam.deliverySurcharge}
-                delivery surcharge is applied to all purchase orders</li>
+            <li>USPS 3-5 day standard delivery time</li>
+
+                <li>A &#036; ${initParam.deliverySurcharge}
+                flat rate shipping fee is applied to all orders under $50</li>
+
         </ul>
 
         <table id="priceBox">
             <tr>
                 <td>subtotal:</td>
                 <td class="checkoutPriceColumn">
-                    &euro; ${cart.subtotal}</td>
+                    &#036; ${cart.subtotal}</td>
             </tr>
             <tr>
-                <td>delivery surcharge:</td>
+                <td>shipping:</td>
+                <c:if test="${cart.subtotal < 50}">
                 <td class="checkoutPriceColumn">
-                    &euro; ${initParam.deliverySurcharge}</td>
+                    &#036; ${initParam.deliverySurcharge}</td>
+                </c:if>
+                <c:if test="${cart.subtotal >= 50}">
+                <td class="checkoutPriceColumn">
+                    &#036; 0.00</td>
+                </c:if>
             </tr>
             <tr>
                 <td class="total">total:</td>
                 <td class="total checkoutPriceColumn">
-                    &euro; ${cart.total}</td>
+                    &#036; ${cart.total}</td>
             </tr>
         </table>
     </div>
