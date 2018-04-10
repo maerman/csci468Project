@@ -72,16 +72,16 @@
 
           <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
             <td>
-              <img src="${initParam.productImagePath}${product.name}.png"
-                   alt="${product.name}">
+              <img src="${initParam.productImagePath}${product.name}.jpg"
+                   alt="${product.name}" style="height: 60%">
             </td>
 
             <td>${product.name}</td>
 
             <td>
-                &euro; ${cartItem.total}
+                &#036; ${cartItem.total}
                 <br>
-                <span class="smallText">( &euro; ${product.price} / unit )</span>
+                <span class="smallText">( &#036; ${product.price} / unit )</span>
             </td>
 
             <td>

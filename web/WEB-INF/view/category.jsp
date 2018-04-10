@@ -40,8 +40,8 @@
 
             <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
                 <td>
-                    <img src="${initParam.productImagePath}${product.name}.png"
-                         alt="${product.name}">
+                    <img src="${initParam.productImagePath}${product.name}.jpg"
+                         alt="${product.name}" style="height:70%">
                 </td>
 
                 <td>
@@ -50,7 +50,7 @@
                     <span class="smallText">${product.description}</span>
                 </td>
 
-                <td>&euro; ${product.price}</td>
+                <td>&#036; ${product.price}</td>
 
                 <td>
                     <form action="<c:url value='addToCart'/>" method="post">

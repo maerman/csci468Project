@@ -7,9 +7,11 @@
 
 <div id="indexLeftColumn">
     <div id="welcomeText">
-        <p style="font-size: larger">Welcome to Ambience Candles, your one-stop shop for quality candles at reasonable prices.</p>
+        <p style="font-size: larger">Welcome to the online home of the Affable Bean Green Grocer.</p>
 
-        <p>Allow us to fill your home with our high quality aromas made from all natural ingredients locally sourced by our master artisans.</p>
+        <p>Enjoy browsing and learning more about our unique home delivery
+            service bringing you fresh organic produce, dairy, meats, breads
+            and other delicious and healthy items to your doorstep.</p>
     </div>
 </div>
 
