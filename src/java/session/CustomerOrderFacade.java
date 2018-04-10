@@ -5,6 +5,7 @@
 
 package session;
 
+import entity.Customer;
 import entity.CustomerOrder;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,6 +33,10 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
         CustomerOrder order = em.find(CustomerOrder.class, id);
         em.refresh(order);
         return order;
+    }
+
+    public CustomerOrder findByCustomer(Customer customer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

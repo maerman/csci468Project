@@ -46,7 +46,7 @@
             });
         </script>
 
-        <title>The Affable Bean Green Grocer</title>
+        <title>Ambience Candles</title>
     </head>
     <body>
         <div id="main">
@@ -151,8 +151,8 @@
                 </div>
 
                 <a href="<c:url value='/'/>">
-                    <img src="img/logo.png" id="logo" alt="Affable Bean logo">
+                    <img src="img/logo.png" id="logo" alt="Ambience Logo">
                 </a>
 
-                <img src="img/logoText.png" id="logoText" alt="the affable bean">
+                <img src="img/logoText.png" id="logoText" alt="Ambience Candles">
             </div>
