@@ -12,12 +12,12 @@ body {
     width: 850px;
     text-align: center;
     margin: 20px auto;
-    color: #444;
+    color: whitesmoke;
 }
 
 hr {
     border: 0;
-    background-color: #333;
+    background-color: #1F2833;
     height: 1px;
 }
 
@@ -25,7 +25,7 @@ table {
     margin: 0 20px;
     border-spacing: 0;
     text-align: center;
-    border: solid 1px #f5eabe;
+    border: solid 1px #45A29E;
 }
 
 a {
@@ -53,20 +53,20 @@ label.error {
 
 
 /* general styles */
-#main { background: #f7f7e9 }
+#main { background: #1F2833 }
 
 #singleColumn {
     margin: 20px 30px;
     text-align: left;
 }
 
-.lightBlue { background-color: #edf8f7 }
+.lightBlue { background-color: #C5C6C7 }
 
-.white { background-color: #fff }
+.white { background-color: white; }
 
 .bubble {
     font-weight: bold;
-    background-color: #f5eabe;
+    background-color: #45A29E;
     padding: 5px;
     color: inherit;
     display: inline;
@@ -75,7 +75,11 @@ label.error {
 
 .hMargin { margin: 0 30px }
 
-.smallText { font-size: small }
+.smallText { 
+    font-size: small;
+    color: black;
+
+}
 
 .reallySmallText { font-size: xx-small }
 
@@ -181,6 +185,7 @@ label.error {
 #welcomeText {
     margin: 30px 5px 0 30px;
     line-height: 1.4em;
+    color: white;
 }
 
 .categoryBox {
@@ -195,7 +200,7 @@ label.error {
 
 .categoryLabel {
     position: absolute;
-    background-color: #fff;
+    background-color: #C5C6C7;
     opacity: 0.7;
     height: 40px;
     width: 210px;
@@ -238,7 +243,7 @@ label.error {
 }
 
 #selectedCategory {
-    background-color: #b2d2d2;
+    background-color: #C5C6C7;
     margin-left: 10px;
     width: 139px;
 }
@@ -256,6 +261,7 @@ label.error {
 .categoryText {
     line-height: 25px;
     font-size: x-large;
+    color: black;
 }
 
 #productTable {
@@ -268,7 +274,7 @@ label.error {
 
 #productTable tr { height: 90px }
 
-#productTable td { width: 145px }
+#productTable td { width: 145px; color: #45A29E }
 
 
 /* cart page styles */
@@ -292,7 +298,7 @@ label.error {
 #checkoutTable {
     width: 405px;
     padding: 10px;
-    background-color: #f5eabe;
+    background-color: #45A29E;
     float: left;
     border-radius: 4px;
 }
@@ -333,7 +339,7 @@ label.error {
 #confirmationText {
     margin: 0 20px 20px;
     padding: 10px;
-    background-color: #f5eabe;
+    background-color: #45A29E;
     float: left;
     border-radius: 4px;
 }

@@ -48,10 +48,10 @@ public class OrderManager {
     private OrderedProductFacade orderedProductFacade;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
+    public int placeOrder(String name, String email, String phone, String address, String city, String state, String zipcode, String ccNumber, ShoppingCart cart) {
 
         try {
-            Customer customer = addCustomer(name, email, phone, address, cityRegion, ccNumber);
+            Customer customer = addCustomer(name, email, phone, address, city, state, zipcode, ccNumber);
             CustomerOrder order = addOrder(customer, cart);
             addOrderedItems(order, cart);
             return order.getId();
@@ -61,14 +61,16 @@ public class OrderManager {
         }
     }
 
-    private Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
+    private Customer addCustomer(String name, String email, String phone, String address, String city,String state, String zipcode, String ccNumber) {
 
         Customer customer = new Customer();
         customer.setName(name);
         customer.setEmail(email);
         customer.setPhone(phone);
         customer.setAddress(address);
-        customer.setCityRegion(cityRegion);
+        customer.setCity(city);
+        customer.setState(state);
+        customer.setZipcode(zipcode);
         customer.setCcNumber(ccNumber);
 
         em.persist(customer);

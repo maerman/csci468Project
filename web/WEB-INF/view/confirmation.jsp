@@ -4,7 +4,6 @@
     Author     : tgiunipero
 --%>
 
-
 <div id="singleColumn">
 
     <p id="confirmationText">
@@ -19,12 +18,10 @@
     </p>
 
     <div class="summaryColumn" >
-
         <table id="orderSummaryTable" class="detailsTable">
             <tr class="header">
                 <th colspan="3">order summary</th>
             </tr>
-
             <tr class="tableHeading">
                 <td>product</td>
                 <td>quantity</td>
@@ -39,7 +36,7 @@
                         ${orderedProduct.quantity}
                     </td>
                     <td class="confirmationPriceColumn">
-                        &euro; ${products[iter.index].price * orderedProduct.quantity}
+                        &#036; ${products[iter.index].price * orderedProduct.quantity}
                     </td>
                 </tr>
 
@@ -57,8 +54,7 @@
                 <td id="totalCellRight">&#036; ${orderRecord.amount}</td>
             </tr>
 
-            <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>
-
+            <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>d
             <tr class="lightBlue">
                 <td colspan="3" id="dateProcessedRow"><strong>date processed:</strong>
                     ${orderRecord.dateCreated}
@@ -81,7 +77,7 @@
                     <br>
                     ${customer.address}
                     <br>
-                    Prague ${customer.cityRegion}
+                    ${customer.city}, ${customer.state} ${customer.zipcode}
                     <br>
                     <hr>
                     <strong>email:</strong> ${customer.email}

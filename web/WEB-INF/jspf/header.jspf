@@ -151,8 +151,8 @@
                 </div>
 
                 <a href="<c:url value='/'/>">
-                    <img src="img/logo.png" id="logo" alt="Ambiance logo">
+                    <img src="img/logo.png" id="logo" style="height:70%" alt="Ambiance logo">
                 </a>
 
-                <img src="img/ambient.png" id="logoText" alt="ambiance">
+                    <h1 style="color:white;">Ambiance Candles</h1>
             </div>
