@@ -4,7 +4,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/MNasty/Documents/NetBeansProjects/csci468Project-redux/web/WEB-INF/view/checkout.jsp</file>
+=======
+            <file>file:/E:/Projects/csci468Project/web/WEB-INF/web.xml</file>
+            <file>file:/E:/Projects/csci468Project/web/WEB-INF/jspf/footer.jspf</file>
+            <file>file:/E:/Projects/csci468Project/src/java/controller/AdminServlet.java</file>
+            <file>file:/E:/Projects/csci468Project/web/WEB-INF/view/category.jsp</file>
+            <file>file:/E:/Projects/csci468Project/web/WEB-INF/view/product.jsp</file>
+            <file>file:/E:/Projects/csci468Project/web/index.jsp</file>
+            <file>file:/E:/Projects/csci468Project/src/java/controller/ControllerServlet.java</file>
+            <file>file:/E:/Projects/csci468Project/web/WEB-INF/view/cart.jsp</file>
+            <file>file:/E:/Projects/csci468Project/web/WEB-INF/jspf/header.jspf</file>
+            <file>file:/E:/Projects/csci468Project/src/java/session/CustomerOrderFacade.java</file>
+            <file>file:/E:/Projects/csci468Project/web/css/affablebean.css</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

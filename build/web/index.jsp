@@ -1,9 +1,3 @@
-<%--
-    Document   : index
-    Created on : Jun 9, 2010, 3:59:32 PM
-    Author     : tgiunipero
---%>
-
 
 <div id="indexLeftColumn">
     <div id="welcomeText">

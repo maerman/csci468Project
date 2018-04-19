@@ -1,8 +1,3 @@
-<%--
-    Document   : footer
-    Created on : May 20, 2010, 12:20:12 AM
-    Author     : tgiunipero
---%>
 
 
             <div id="footer">
@@ -13,7 +8,8 @@
                     &nbsp;&nbsp;::&nbsp;&nbsp;
                     <a href="<c:url value='#'/>">Contact</a>
                     &nbsp;&nbsp;&copy;&nbsp;&nbsp;
-                    2017 Ambiance Candles</p>
+
+                    2018 Ambience</p>
             </div>
         </div>
     </body>
