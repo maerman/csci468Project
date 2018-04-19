@@ -7,6 +7,7 @@ package session;
 
 import entity.Customer;
 import entity.CustomerOrder;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,6 +36,7 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
         return order;
     }
 
+    @RolesAllowed("affableBeanAdmin")
     public CustomerOrder findByCustomer(Customer customer) {
         throw new UnsupportedOperationException("Not yet implemented");
     }

@@ -1,6 +1,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<!--set language based on user's choice-->
+<c:if test="${!empty language}">
+    <fmt:setLocale value="${language}" scope="session" />
+</c:if>
 
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -47,10 +52,71 @@
                 <div id="widgetBar">
 
                     <div class="headerWidget">
-                        [ language toggle ]
+
+                        <%-- If servlet path contains '/confirmation', do not display language toggle --%>
+                        <c:if test="${!fn:contains(pageContext.request.servletPath,'/confirmation')}">
+                            
+                            <%-- language selection widget --%>
+                            <c:choose>
+                                <%-- When user hasn't explicitly set language,
+                                     render toggle according to browser's preferred locale --%>
+                                <c:when test="${empty sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}">
+                                    <c:choose>
+                                        <c:when test="${pageContext.request.locale.language ne 'es'}">
+                                            english
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:url var="url" value="chooseLanguage">
+                                                <c:param name="language" value="en"/>
+                                            </c:url>
+                                            <div class="bubble"><a href="${url}">english</a></div>
+                                        </c:otherwise>
+                                    </c:choose> |
+
+                                    <c:choose>
+                                        <c:when test="${pageContext.request.locale.language eq 'es'}">
+                                            español
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:url var="url" value="chooseLanguage">
+                                                <c:param name="language" value="es"/>
+                                            </c:url>
+                                            <div class="bubble"><a href="${url}">español</a></div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:when>
+
+                                <%-- Otherwise, render widget according to the set locale --%>
+                                <c:otherwise>
+                                    <c:choose>
+                                        <c:when test="${sessionScope['javax.servlet.jsp.jstl.fmt.locale.session'] ne 'es'}">
+                                            english
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:url var="url" value="chooseLanguage">
+                                                <c:param name="language" value="en"/>
+                                            </c:url>
+                                            <div class="bubble"><a href="${url}">english</a></div>
+                                        </c:otherwise>
+                                    </c:choose> |
+
+                                    <c:choose>
+                                        <c:when test="${sessionScope['javax.servlet.jsp.jstl.fmt.locale.session'] eq 'es'}">
+                                            español
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:url var="url" value="chooseLanguage">
+                                                <c:param name="language" value="es"/>
+                                            </c:url>
+                                            <div class="bubble"><a href="${url}">español</a></div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                     </div>
 
-                <%-- checkout widget --%>
+                    <%-- checkout widget --%>
                     <div class="headerWidget">
 
                        <%-- tests for the following:
@@ -104,48 +170,50 @@
                   </div>
 
                 <%-- shopping cart widget --%>
-                  <div class="headerWidget" id="viewCart">
+                <div class="headerWidget" id="viewCart">
 
                     <img src="img/cart.gif" alt="shopping cart icon" id="cart">
 
-                  <%-- If 'numberOfItems' property doesn't exist, or if number of items
-                       in cart is 0, output '0', otherwise output 'numberOfItems' --%>
-                    <span class="horizontalMargin">
-                      <c:choose>
-                        <c:when test="${cart.numberOfItems == null}">
-                          0
-                        </c:when>
-                        <c:otherwise>
-                          ${cart.numberOfItems}
-                        </c:otherwise>
-                      </c:choose>
+                    <%-- If 'numberOfItems' property doesn't exist, or if number of items
+                         in cart is 0, output '0', otherwise output 'numberOfItems' --%>
+                      <span class="horizontalMargin">
+                        <c:choose>
+                          <c:when test="${cart.numberOfItems == null}">
+                            0
+                          </c:when>
+                          <c:otherwise>
+                            ${cart.numberOfItems}
+                          </c:otherwise>
+                        </c:choose>
 
-                  <%-- Handle singular/plural forms of 'item' --%>
-                      <c:choose>
-                        <c:when test="${cart.numberOfItems == 1}">
-                          item
-                        </c:when>
-                        <c:otherwise>
-                          items
-                        </c:otherwise>
-                      </c:choose>
-                    </span>
+                    <%-- Handle singular/plural forms of 'item' --%>
+                        <c:choose>
+                          <c:when test="${cart.numberOfItems == 1}">
+                            item
+                          </c:when>
+                          <c:otherwise>
+                            items
+                          </c:otherwise>
+                        </c:choose>
+                      </span>
 
-                    <c:if test="${!empty cart && cart.numberOfItems != 0 &&
+                      <c:if test="${!empty cart && cart.numberOfItems != 0 &&
 
-                                  !fn:contains(pageContext.request.servletPath,'/cart') &&
-                                  requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
+                                    !fn:contains(pageContext.request.servletPath,'/cart') &&
+                                    requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
 
-                      <a href="<c:url value='viewCart'/>" class="bubble">
-                          view cart
-                      </a>
-                    </c:if>
-                </div>
+                        <a href="<c:url value='viewCart'/>" class="bubble">
+                            view cart
+                        </a>
+                      </c:if>
+                    </div>
                 </div>
 
                 <a href="<c:url value='/'/>">
-                    <img src="img/logo.png" id="logo" alt="Ambience Logo">
+                    <img src="img/logo.png" id="logo" style="height:70%" alt="Ambiance logo">
                 </a>
 
-                <img src="img/logoText.png" id="logoText" alt="Ambiance">
+                    <h1 style="color:white;">Ambiance Candles</h1>
+                    
+                    <img src="img/logo.png" id="logo" alt="Ambience Logo">
             </div>
