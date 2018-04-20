@@ -4,7 +4,7 @@
 <c:set var='view' value='/login' scope='session' />
 
 <div>
-    <h1>[Page title]</h1>
+    <h1><fmt:message key="logintitle"/></h1>
     <div id="signInBox">
         <p>[ sign in ]</p>
         <form>
@@ -22,7 +22,7 @@
         <input class="accountButtons" type="submit" value="Log Out">
     </div>
     <br>
-    <p>[ acc info recovery ]</p>
+    <p>[ <fmt:message key="accountrecover"/> ]</p>
     <input type="submit" value="Recover">
     <br>
     <br>
