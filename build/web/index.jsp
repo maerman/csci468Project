@@ -1,9 +1,13 @@
+<%-- Set session-scoped variable to track the view user is coming from.
+     This is used by the language mechanism in the Controller so that
+     users view the same page when switching between English and Czech. --%>
+<c:set var='view' value='/index' scope='session' />
 
 <div id="indexLeftColumn">
     <div id="welcomeText">
-        <p style="font-size: larger">Welcome to Ambience Candles, your one-stop shop for quality candles at reasonable prices.</p>
-
-        <p>Allow us to fill your home with our high quality aromas made from all natural ingredients locally sourced by our master artisans.</p>
+        <p style="font-size: larger"><fmt:message key='greeting' /></p>
+        
+        <p><fmt:message key='introText' /></p>
     </div>
 </div>
 
@@ -12,7 +16,7 @@
         <div class="categoryBox">
             <a href="<c:url value='category?${category.id}'/>">
                 <span class="categoryLabel"></span>
-                <span class="categoryLabelText"><fmt:message key='${category.name}'/></span>
+                <span class="categoryLabelText"><fmt:message key="${category.name}"/></span>
 
                 <img src="${initParam.categoryImagePath}${category.name}.jpg"
                      alt="<fmt:message key='${category.name}'/>" class="categoryImage">

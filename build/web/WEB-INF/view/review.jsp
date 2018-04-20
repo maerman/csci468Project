@@ -4,13 +4,13 @@
 <c:set var='view' value='/reviw' scope='session' />
 
 <div>
-    <h1>[Page title]</h1>
+    <h1><fmt:message key="reviewtitle"/></h1>
     <div class="reviewLeftColumn">
-        <p>[ customer reviews ]</p>
+        <p>[ <fmt:message key="customerreview"/> ]</p>
     </div>
     <div class="reviewRightColumn">
         <form>
-            <textarea id="review" value="review" rows="10" cols="30">Submit Review</textarea>
+            <textarea id="review" value="review" rows="10" cols="30"><fmt:message key="submitreview"/></textarea>
             <input type="submit">
         </form>
     </div>

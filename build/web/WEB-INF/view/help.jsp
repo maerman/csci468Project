@@ -4,8 +4,8 @@
 <c:set var='view' value='/help' scope='session' />
 
 <div>
-    <h1>[Page title]</h1>
+    <h1><fmt:message key="helptitle"/></h1>
     <div class="miscInfoBox">
-        <p class="infoText">[ information ]</p>
+        <p class="infoText">[ <fmt:message key="information"/> ]</p>
     </div>
 </div>

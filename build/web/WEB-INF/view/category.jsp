@@ -17,14 +17,14 @@
             <c:when test="${category.name == selectedCategory.name}">
                 <div class="categoryButton" id="selectedCategory">
                     <span class="categoryText">
-                        ${category.name}
+                        <fmt:message key="${category.name}"/>
                     </span>
                 </div>
             </c:when>
             <c:otherwise>
                 <a href="<c:url value='category?${category.id}'/>" class="categoryButton">
                     <span class="categoryText">
-                        ${category.name}
+                        <fmt:message key="${category.name}"/>
                     </span>
                 </a>
             </c:otherwise>
@@ -45,11 +45,11 @@
             <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
                 <td>
                     <img src="${initParam.productImagePath}${product.name}.jpg"
-                         alt="${product.name}" style="height:70%">
+                         alt="<fmt:message key='${product.name}'/>" style="height:70%">
                 </td>
 
                 <td>
-                    ${product.name}
+                    <fmt:message key="${product.name}"/>
                     <br>
                     <span class="smallText">${product.description}</span>
                 </td>
@@ -63,7 +63,7 @@
                                value="${product.id}">
                         <input type="submit"
                                name="submit"
-                               value="add to cart">
+                               value="<fmt:message key='addToCart'/>">
                     </form>
                 </td>
             </tr>

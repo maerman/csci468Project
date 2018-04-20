@@ -16,7 +16,7 @@
         <div class="categoryBox">
             <a href="<c:url value='category?${category.id}'/>">
                 <span class="categoryLabel"></span>
-                <span class="categoryLabelText"><fmt:message key='${category.name}'/></span>
+                <span class="categoryLabelText"><fmt:message key="${category.name}"/></span>
 
                 <img src="${initParam.categoryImagePath}${category.name}.jpg"
                      alt="<fmt:message key='${category.name}'/>" class="categoryImage">

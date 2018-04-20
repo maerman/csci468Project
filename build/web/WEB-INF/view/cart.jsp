@@ -13,13 +13,13 @@
 
     <c:choose>
         <c:when test="${cart.numberOfItems > 1}">
-            <p>Your shopping cart contains ${cart.numberOfItems} items.</p>
+            <p>Your shopping cart contains ${cart.numberOfItems} <fmt:message key="items"/>.</p>
         </c:when>
         <c:when test="${cart.numberOfItems == 1}">
-            <p>Your shopping cart contains ${cart.numberOfItems} item.</p>
+            <p>Your shopping cart contains ${cart.numberOfItems} <fmt:message key="items"/>.</p>
         </c:when>
         <c:otherwise>
-            <p>Your shopping cart is empty.</p>
+            <p><fmt:message key="yourCartEmpty"/></p>
         </c:otherwise>
     </c:choose>
 
@@ -31,7 +31,7 @@
                 <c:param name="clear" value="true"/>
             </c:url>
 
-            <a href="${url}" class="bubble hMargin">clear cart</a>
+            <a href="${url}" class="bubble hMargin"><fmt:message key="clearCart"/></a>
         </c:if>
 
         <%-- continue shopping widget --%>
@@ -53,21 +53,21 @@
 
         <%-- checkout widget --%>
         <c:if test="${!empty cart && cart.numberOfItems != 0}">
-            <a href="<c:url value='checkout'/>" class="bubble hMargin">proceed to checkout &#x279f;</a>
+            <a href="<c:url value='checkout'/>" class="bubble hMargin"><fmt:message key="proceedCheckout"/></a>
         </c:if>
     </div>
 
     <c:if test="${!empty cart && cart.numberOfItems != 0}">
 
-      <h4 id="subtotal">subtotal: &#036; ${cart.subtotal}</h4>
+      <h4 id="subtotal"><fmt:message key="subtotal"/> ${cart.subtotal}</h4>
 
       <table id="cartTable">
 
         <tr class="header">
-            <th>product</th>
-            <th>name</th>
-            <th>price</th>
-            <th>quantity</th>
+            <th><fmt:message key="product"/></th>
+            <th><fmt:message key="name"/></th>
+            <th><fmt:message key="price"/></th>
+            <th><fmt:message key="quantity"/></th>
         </tr>
 
         <c:forEach var="cartItem" items="${cart.items}" varStatus="iter">
@@ -77,15 +77,15 @@
           <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
             <td>
               <img src="${initParam.productImagePath}${product.name}.jpg"
-                   alt="${product.name}" style="height: 60%">
+                   alt="<fmt:message key="${product.name}"/>" style="height: 60%">
             </td>
 
-            <td>${product.name}</td>
+            <td><fmt:message key="${product.name}"/></td>
 
             <td>
                 &#036; ${cartItem.total}
                 <br>
-                <span class="smallText">( &#036; ${product.price} / unit )</span>
+                <span class="smallText">( &#036; ${product.price} / <fmt:message key="unit"/> )</span>
             </td>
 
             <td>
@@ -101,7 +101,7 @@
                            style="margin:5px">
                     <input type="submit"
                            name="submit"
-                           value="update">
+                           value="<fmt:message key='update'/>">
                 </form>
             </td>
           </tr>

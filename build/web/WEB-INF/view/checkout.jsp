@@ -53,12 +53,12 @@
 
 <div id="singleColumn">
 
-    <h2>checkout</h2>
+    <h2><fmt:message key="checkout"/></h2>
 
-    <p>In order to purchase the items in your shopping cart, please provide us with the following information:</p>
+    <p><fmt:message key="checkoutText"/></p>
 
     <c:if test="${!empty orderFailureFlag}">
-        <p class="error">We were unable to process your order. Please try again!</p>
+        <p class="error"><fmt:message key="orderFailureError"/></p>
     </c:if>
 
     <form id="checkoutForm" action="<c:url value='purchase'/>" method="post">
@@ -66,31 +66,31 @@
           <c:if test="${!empty validationErrorFlag}">
             <tr>
                 <td colspan="2" style="text-align:left">
-                    <span class="error smallText">Please provide valid entries for the following field(s):
+                    <span class="error smallText"><fmt:message key="validationErrorMessage"/>
 
                       <c:if test="${!empty nameError}">
-                        <br><span class="indent"><strong>name</strong> (e.g., Bilbo Baggins)</span>
+                        <br><span class="indent"><fmt:message key="nameError"/></span>
                       </c:if>
                       <c:if test="${!empty emailError}">
-                        <br><span class="indent"><strong>email</strong> (e.g., b.baggins@hobbit.com)</span>
+                        <br><span class="indent"><fmt:message key="emailError"/></span>
                       </c:if>
                       <c:if test="${!empty phoneError}">
-                        <br><span class="indent"><strong>phone</strong> (e.g., 7168546654)</span>
+                        <br><span class="indent"><fmt:message key="phoneError"/></span>
                       </c:if>
                       <c:if test="${!empty addressError}">
-                        <br><span class="indent"><strong>address</strong> (e.g., 140 Goethe St.)</span>
+                        <br><span class="indent"><fmt:message key="addressError"/></span>
                       </c:if>
                       <c:if test="${!empty cityError}">
-                        <br><span class="indent"><strong>city</strong> (e.g., Buffalo)</span>
+                        <br><span class="indent"><fmt:message key="cityc"/></span>
                       </c:if>
                       <c:if test="${!empty stateError}">
-                        <br><span class="indent"><strong>state</strong> (e.g., NY)</span>
+                        <br><span class="indent"><fmt:message key="statec"/></span>
                       </c:if>
                       <c:if test="${!empty zipcodeError}">
-                        <br><span class="indent"><strong>zipcode</strong> (e.g., 14215)</span>
+                        <br><span class="indent"><fmt:message key="zipc"/></span>
                       </c:if>
                       <c:if test="${!empty ccNumberError}">
-                        <br><span class="indent"><strong>credit card</strong> (e.g., 1111222233334444)</span>
+                        <br><span class="indent"><fmt:message key="ccNumberError"/></span>
                       </c:if>
 
                     </span>
@@ -98,7 +98,7 @@
             </tr>
           </c:if>
             <tr>
-                <td><label for="name">name:</label></td>
+                <td><label for="name"><fmt:message key="customerName"/></label></td>
                 <td class="inputField">
                     <input type="text"
                            size="31"
@@ -109,7 +109,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="email">email:</label></td>
+                <td><label for="email"><fmt:message key="email"/>:</label></td>
                 <td class="inputField">
                     <input type="text"
                            size="31"
@@ -120,7 +120,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="phone">phone:</label></td>
+                <td><label for="phone"><fmt:message key="phone"/>:</label></td>
                 <td class="inputField">
                     <input type="text"
                            size="31"
@@ -131,7 +131,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="address">address:</label></td>
+                <td><label for="address"><fmt:message key="address"/>:</label></td>
                 <td class="inputField">
                     <input type="text"
                            size="31"
@@ -142,7 +142,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="city">city:</label></td>
+                <td><label for="city"><fmt:message key="city"/>:</label></td>
                 <td class="inputField" style="text-align:left;">
                     <input type="text"
                            size="15"
@@ -154,7 +154,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="state">state:</label></td>
+                <td><label for="state"><fmt:message key="state"/>:</label></td>
                 <td class="inputField" style="text-align:left;">
                     <input type="text"
                            size="2"
@@ -166,7 +166,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="zipcode">zip:</label></td>
+                <td><label for="zipcode"><fmt:message key="zip"/>:</label></td>
                 <td class="inputField" style="text-align:left;">
                     <input type="text"
                            size="5"
@@ -178,7 +178,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="creditcard">credit card number:</label></td>
+                <td><label for="creditcard"><fmt:message key="creditCard"/>:</label></td>
                 <td class="inputField">
                     <input type="text"
                            size="31"
@@ -190,7 +190,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="submit purchase">
+                    <input type="submit" value="<fmt:message key='submit'/>">
                 </td>
             </tr>
         </table>
@@ -199,21 +199,23 @@
     <div id="infoBox">
 
         <ul>
-            <li>USPS 3-5 day standard delivery time</li>
+            <li><fmt:message key='standard'/></li>
 
-                <li>A &#036; ${initParam.deliverySurcharge}
-                flat rate shipping fee is applied to all orders under $50</li>
+                <li><fmt:message key="nextDayGuarantee"/></li>
+                <li><fmt:message key="deliveryFee1"/>
+                <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${initParam.deliverySurcharge}"/>
+                <fmt:message key="deliveryFee2"/></li>
 
         </ul>
 
         <table id="priceBox">
             <tr>
-                <td>subtotal:</td>
+                <td><fmt:message key="subtotal"/></td>
                 <td class="checkoutPriceColumn">
                     &#036; ${cart.subtotal}</td>
             </tr>
             <tr>
-                <td>shipping:</td>
+                <td><fmt:message key="surcharge"/>:</td>
                 <c:if test="${cart.subtotal < 50}">
                 <td class="checkoutPriceColumn">
                     &#036; ${initParam.deliverySurcharge}</td>
@@ -224,7 +226,7 @@
                 </c:if>
             </tr>
             <tr>
-                <td class="total">total:</td>
+                <td class="total"><fmt:message key="total"/>:</td>
                 <td class="total checkoutPriceColumn">
                     &#036; ${cart.total}</td>
             </tr>

@@ -4,7 +4,7 @@
 <c:set var='view' value='/edit' scope='session' />
 
 <div>
-    <h1>[Page title]</h1>
+    <h1><fmt:message key="edittitle"/></h1>
     <div class="accountSetting">
         <form>
             <input type="text" size="35" placeholder="Username">

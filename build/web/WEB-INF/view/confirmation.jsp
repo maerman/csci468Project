@@ -7,31 +7,31 @@
 <div id="singleColumn">
 
     <p id="confirmationText">
-        <strong>Your order has been successfully processed and will be delivered within 3-5 business days.</strong>
+        <strong><fmt:message key="successMessage"/></strong>
         <br><br>
-        Please keep a note of your confirmation number:
+        <fmt:message key="confirmationNumberMessage"/>
         <strong>${orderRecord.confirmationNumber}</strong>
         <br>
-        If you have a query concerning your order, feel free to <a href="#">contact us</a>.
+        <fmt:message key="contactMessage"/>
         <br><br>
-        Thank you for shopping at the Ambiance Candles!
+        <fmt:message key="thankYouMessage"/>
     </p>
 
     <div class="summaryColumn" >
         <table id="orderSummaryTable" class="detailsTable">
             <tr class="header">
-                <th colspan="3">order summary</th>
+                <th colspan="3"><fmt:message key="orderSummary"/></th>
             </tr>
             <tr class="tableHeading">
-                <td>product</td>
-                <td>quantity</td>
-                <td>price</td>
+                <td><fmt:message key="product"/></td>
+                <td><fmt:message key="quantity"/></td>
+                <td><fmt:message key="price"/></td>
             </tr>
 
             <c:forEach var="orderedProduct" items="${orderedProducts}" varStatus="iter">
 
                 <tr class="${((iter.index % 2) != 0) ? 'lightBlue' : 'white'}">
-                    <td>${products[iter.index].name}</td>
+                    <fmt:message key="${products[iter.index].name}"/>
                     <td class="quantityColumn">
                         ${orderedProduct.quantity}
                     </td>
@@ -45,18 +45,18 @@
             <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>
 
             <tr class="lightBlue">
-                <td colspan="2" id="deliverySurchargeCellLeft"><strong>delivery surcharge:</strong></td>
+                <td colspan="2" id="deliverySurchargeCellLeft"><strong><fmt:message key="surcharge"/>:</strong></td>
                 <td id="deliverySurchargeCellRight">&#036; ${initParam.deliverySurcharge}</td>
             </tr>
 
             <tr class="lightBlue">
-                <td colspan="2" id="totalCellLeft"><strong>total:</strong></td>
+                <td colspan="2" id="totalCellLeft"><strong><fmt:message key="total"/>:</strong></td>
                 <td id="totalCellRight">&#036; ${orderRecord.amount}</td>
             </tr>
 
             <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>d
             <tr class="lightBlue">
-                <td colspan="3" id="dateProcessedRow"><strong>date processed:</strong>
+                <td colspan="3" id="dateProcessedRow"><strong><fmt:message key="dateProcessed"/>:</strong>
                     ${orderRecord.dateCreated}
                 </td>
             </tr>
@@ -68,7 +68,7 @@
 
         <table id="deliveryAddressTable" class="detailsTable">
             <tr class="header">
-                <th colspan="3">delivery address</th>
+                <th colspan="3"><fmt:message key="deliveryAddress"/></th>
             </tr>
 
             <tr>
@@ -80,9 +80,9 @@
                     ${customer.city}, ${customer.state} ${customer.zipcode}
                     <br>
                     <hr>
-                    <strong>email:</strong> ${customer.email}
+                    <strong><fmt:message key="email"/>:</strong> ${customer.email}
                     <br>
-                    <strong>phone:</strong> ${customer.phone}
+                    <strong><fmt:message key="phone"/>:</strong> ${customer.phone}
                 </td>
             </tr>
         </table>
