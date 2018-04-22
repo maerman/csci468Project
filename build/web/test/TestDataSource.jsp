@@ -22,11 +22,11 @@
     </head>
 
     <body>
-        <h2>data from affablebean.product:</h2>
+        <h2>data from affablebean.category:</h2>
 
         <%-- Use Database > DB Report in the Palette --%>
         <sql:query var="result" dataSource="jdbc/affablebean">
-            SELECT * FROM product
+            SELECT * FROM category
         </sql:query>
 
         <table border="1">

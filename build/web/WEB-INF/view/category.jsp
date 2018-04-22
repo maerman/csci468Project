@@ -1,13 +1,21 @@
 <%--
-    Document   : category
-    Created on : May 21, 2010, 12:20:23 AM
-    Author     : tgiunipero
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
+
+ * author: tgiunipero
 --%>
+
 
 <%-- Set session-scoped variable to track the view user is coming from.
      This is used by the language mechanism in the Controller so that
-     users view the same page when switching between English and Spanish. --%>
-<c:set var='view' value='/category' scope='session' />
+     users view the same page when switching between English and Czech. --%>
+<c:set var="view" value="/category" scope="session" />
+
+
+<%-- HTML markup starts below --%>
 
 <div id="categoryLeftColumn">
 
@@ -44,17 +52,17 @@
 
             <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
                 <td>
-                    <img src="${initParam.productImagePath}${product.name}.jpg"
-                         alt="<fmt:message key='${product.name}'/>" style="height:70%">
+                    <img src="${initParam.productImagePath}${product.name}.png"
+                         alt="<fmt:message key='${product.name}'/>">
                 </td>
 
                 <td>
                     <fmt:message key="${product.name}"/>
                     <br>
-                    <span class="smallText">${product.description}</span>
+                    <span class="smallText"><fmt:message key='${product.name}Description'/></span>
                 </td>
 
-                <td>&#036; ${product.price}</td>
+                <td><fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/></td>
 
                 <td>
                     <form action="<c:url value='addToCart'/>" method="post">
