@@ -1,16 +1,15 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
  */
+
 package session;
 
-import cart.ShoppingCart;
-import cart.ShoppingCartItem;
-import entity.Customer;
-import entity.CustomerOrder;
-import entity.OrderedProduct;
-import entity.OrderedProductPK;
-import entity.Product;
+import cart.*;
+import entity.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,10 +47,10 @@ public class OrderManager {
     private OrderedProductFacade orderedProductFacade;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public int placeOrder(String name, String email, String phone, String address, String city, String state, String zipcode, String ccNumber, ShoppingCart cart) {
+    public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
 
         try {
-            Customer customer = addCustomer(name, email, phone, address, city, state, zipcode, ccNumber);
+            Customer customer = addCustomer(name, email, phone, address, cityRegion, ccNumber);
             CustomerOrder order = addOrder(customer, cart);
             addOrderedItems(order, cart);
             return order.getId();
@@ -61,16 +60,14 @@ public class OrderManager {
         }
     }
 
-    private Customer addCustomer(String name, String email, String phone, String address, String city,String state, String zipcode, String ccNumber) {
+    private Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
 
         Customer customer = new Customer();
         customer.setName(name);
         customer.setEmail(email);
         customer.setPhone(phone);
         customer.setAddress(address);
-        customer.setCity(city);
-        customer.setState(state);
-        customer.setZipcode(zipcode);
+        customer.setCityRegion(cityRegion);
         customer.setCcNumber(ccNumber);
 
         em.persist(customer);

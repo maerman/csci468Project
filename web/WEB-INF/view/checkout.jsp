@@ -1,15 +1,37 @@
 <%--
-    Document   : checkout
-    Created on : May 21, 2010, 12:20:23 AM
-    Author     : tgiunipero
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
+
+ * author: tgiunipero
 --%>
+
 
 <%-- Set session-scoped variable to track the view user is coming from.
      This is used by the language mechanism in the Controller so that
-     users view the same page when switching between English and Spanish. --%>
-<c:set var='view' value='/checkout' scope='session' />
+     users view the same page when switching between English and Czech. --%>
+<c:set var="view" value="/checkout" scope="session"/>
+
 
 <script src="js/jquery.validate.js" type="text/javascript"></script>
+
+<%-- Add Czech field validation messages if 'cs' is the chosen locale --%>
+<c:choose>
+  <%-- When 'language' session attribute hasn't been set, check browser's preferred locale --%>
+  <c:when test="${empty language}">
+    <c:if test="${pageContext.request.locale.language eq 'cs'}">
+      <script src="js/localization/messages_cs.js" type="text/javascript"></script>
+    </c:if>
+  </c:when>
+  <%-- Otherwise, check 'language' session attribute --%>
+  <c:otherwise>
+    <c:if test="${sessionScope['javax.servlet.jsp.jstl.fmt.locale.session'] eq 'cs'}">
+      <script src="js/localization/messages_cs.js" type="text/javascript"></script>
+    </c:if>
+  </c:otherwise>
+</c:choose>
 
 <script type="text/javascript">
 
@@ -29,27 +51,17 @@
                 address: {
                     required: true
                 },
-                city: {
-                    required: true
-                },
-                state: {
-                    required: true,
-                    minlength: 2
-
-                },
-                zipcode: {
-                    required: true,
-                    minlength: 5
-
-                },
                 creditcard: {
-                    required: true
-
+                    required: true,
+                    creditcard: true
                 }
             }
         });
     });
 </script>
+
+
+<%-- HTML markup starts below --%>
 
 <div id="singleColumn">
 
@@ -80,14 +92,8 @@
                       <c:if test="${!empty addressError}">
                         <br><span class="indent"><fmt:message key="addressError"/></span>
                       </c:if>
-                      <c:if test="${!empty cityError}">
-                        <br><span class="indent"><fmt:message key="cityc"/></span>
-                      </c:if>
-                      <c:if test="${!empty stateError}">
-                        <br><span class="indent"><fmt:message key="statec"/></span>
-                      </c:if>
-                      <c:if test="${!empty zipcodeError}">
-                        <br><span class="indent"><fmt:message key="zipc"/></span>
+                      <c:if test="${!empty cityRegionError}">
+                        <br><span class="indent"><fmt:message key="cityRegionError"/></span>
                       </c:if>
                       <c:if test="${!empty ccNumberError}">
                         <br><span class="indent"><fmt:message key="ccNumberError"/></span>
@@ -98,7 +104,7 @@
             </tr>
           </c:if>
             <tr>
-                <td><label for="name"><fmt:message key="customerName"/></label></td>
+                <td><label for="name"><fmt:message key="customerName"/>:</label></td>
                 <td class="inputField">
                     <input type="text"
                            size="31"
@@ -139,42 +145,15 @@
                            id="address"
                            name="address"
                            value="${param.address}">
-                </td>
-            </tr>
-            <tr>
-                <td><label for="city"><fmt:message key="city"/>:</label></td>
-                <td class="inputField" style="text-align:left;">
-                    <input type="text"
-                           size="15"
-                           maxlength="15"
-                           style="text-align:left;"
-                           id="city"
-                           name="city"
-                           value="${param.city}">
-                </td>
-            </tr>
-            <tr>
-                <td><label for="state"><fmt:message key="state"/>:</label></td>
-                <td class="inputField" style="text-align:left;">
-                    <input type="text"
-                           size="2"
-                           style="text-align:left;"
-                           maxlength="2"
-                           id="state"
-                           name="state"
-                           value="${param.state}">
-                </td>
-            </tr>
-            <tr>
-                <td><label for="zipcode"><fmt:message key="zip"/>:</label></td>
-                <td class="inputField" style="text-align:left;">
-                    <input type="text"
-                           size="5"
-                           maxlength="5"
-                           style="text-align:left;"
-                           id="zipcode"
-                           name="zipcode"
-                           value="${param.zipcode}">
+
+                    <br>
+                    <fmt:message key="prague"/>
+                    <select name="cityRegion">
+                      <c:forEach begin="1" end="10" var="regionNumber">
+                        <option value="${regionNumber}"
+                                <c:if test="${param.cityRegion eq regionNumber}">selected</c:if>>${regionNumber}</option>
+                      </c:forEach>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -185,6 +164,7 @@
                            maxlength="19"
                            id="creditcard"
                            name="creditcard"
+                           class="creditcard"
                            value="${param.creditcard}">
                 </td>
             </tr>
@@ -199,36 +179,27 @@
     <div id="infoBox">
 
         <ul>
-            <li><fmt:message key='standard'/></li>
-
-                <li><fmt:message key="nextDayGuarantee"/></li>
-                <li><fmt:message key="deliveryFee1"/>
+            <li><fmt:message key="nextDayGuarantee"/></li>
+            <li><fmt:message key="deliveryFee1"/>
                 <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${initParam.deliverySurcharge}"/>
                 <fmt:message key="deliveryFee2"/></li>
-
         </ul>
 
         <table id="priceBox">
             <tr>
-                <td><fmt:message key="subtotal"/></td>
+                <td><fmt:message key="subtotal"/>:</td>
                 <td class="checkoutPriceColumn">
-                    &#036; ${cart.subtotal}</td>
+                    <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cart.subtotal}"/></td>
             </tr>
             <tr>
                 <td><fmt:message key="surcharge"/>:</td>
-                <c:if test="${cart.subtotal < 50}">
                 <td class="checkoutPriceColumn">
-                    &#036; ${initParam.deliverySurcharge}</td>
-                </c:if>
-                <c:if test="${cart.subtotal >= 50}">
-                <td class="checkoutPriceColumn">
-                    &#036; 0.00</td>
-                </c:if>
+                    <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${initParam.deliverySurcharge}"/></td>
             </tr>
             <tr>
                 <td class="total"><fmt:message key="total"/>:</td>
                 <td class="total checkoutPriceColumn">
-                    &#036; ${cart.total}</td>
+                    <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cart.total}"/></td>
             </tr>
         </table>
     </div>

@@ -1,6 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
  */
 
 package entity;
@@ -32,9 +35,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email"),
     @NamedQuery(name = "Customer.findByPhone", query = "SELECT c FROM Customer c WHERE c.phone = :phone"),
     @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address"),
-    @NamedQuery(name = "Customer.findByCity", query = "SELECT c FROM Customer c WHERE c.city = :city"),
-    @NamedQuery(name = "Customer.findByState", query = "SELECT c FROM Customer c WHERE c.USState = :state"),
-    @NamedQuery(name = "Customer.findByZipcode", query = "SELECT c FROM Customer c WHERE c.zipcode = :zipcode"),
+    @NamedQuery(name = "Customer.findByCityRegion", query = "SELECT c FROM Customer c WHERE c.cityRegion = :cityRegion"),
     @NamedQuery(name = "Customer.findByCcNumber", query = "SELECT c FROM Customer c WHERE c.ccNumber = :ccNumber")})
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -56,14 +57,8 @@ public class Customer implements Serializable {
     @Column(name = "address")
     private String address;
     @Basic(optional = false)
-    @Column(name = "city")
-    private String city;
-     @Basic(optional = false)
-    @Column(name = "USState")
-    private String USState;
-      @Basic(optional = false)
-    @Column(name = "zipcode")
-    private String zipcode;
+    @Column(name = "city_region")
+    private String cityRegion;
     @Basic(optional = false)
     @Column(name = "cc_number")
     private String ccNumber;
@@ -77,15 +72,13 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public Customer(Integer id, String name, String email, String phone, String address, String city, String state, String zipcode, String ccNumber) {
+    public Customer(Integer id, String name, String email, String phone, String address, String cityRegion, String ccNumber) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.city = city;
-        this.USState = state;
-        this.zipcode = zipcode;
+        this.cityRegion = cityRegion;
         this.ccNumber = ccNumber;
     }
 
@@ -129,27 +122,14 @@ public class Customer implements Serializable {
         this.address = address;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityRegion() {
+        return cityRegion;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-    public String getState() {
-        return USState;
+    public void setCityRegion(String cityRegion) {
+        this.cityRegion = cityRegion;
     }
 
-    public void setState(String state) {
-        this.USState = state;
-    }
-        public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
     public String getCcNumber() {
         return ccNumber;
     }

@@ -1,7 +1,11 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
  */
+
 package controller;
 
 import cart.ShoppingCart;
@@ -15,10 +19,7 @@ import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import session.CategoryFacade;
 import session.OrderManager;
 import session.ProductFacade;
@@ -29,14 +30,14 @@ import validate.Validator;
  * @author tgiunipero
  */
 @WebServlet(name = "Controller",
-        loadOnStartup = 1,
-        urlPatterns = {"/category",
-            "/addToCart",
-            "/viewCart",
-            "/updateCart",
-            "/checkout",
-            "/purchase",
-            "/chooseLanguage"})
+            loadOnStartup = 1,
+            urlPatterns = {"/category",
+                           "/addToCart",
+                           "/viewCart",
+                           "/updateCart",
+                           "/checkout",
+                           "/purchase",
+                           "/chooseLanguage"})
 public class ControllerServlet extends HttpServlet {
 
     private String surcharge;
@@ -47,6 +48,7 @@ public class ControllerServlet extends HttpServlet {
     private ProductFacade productFacade;
     @EJB
     private OrderManager orderManager;
+
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -60,9 +62,9 @@ public class ControllerServlet extends HttpServlet {
         getServletContext().setAttribute("categories", categoryFacade.findAll());
     }
 
+
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -76,6 +78,7 @@ public class ControllerServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Category selectedCategory;
         Collection<Product> categoryProducts;
+
 
         // if category page is requested
         if (userPath.equals("/category")) {
@@ -98,7 +101,8 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("categoryProducts", categoryProducts);
             }
 
-            // if cart page is requested
+
+        // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
 
             String clear = request.getParameter("clear");
@@ -111,7 +115,8 @@ public class ControllerServlet extends HttpServlet {
 
             userPath = "/cart";
 
-            // if checkout page is requested
+
+        // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
 
             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
@@ -120,19 +125,22 @@ public class ControllerServlet extends HttpServlet {
             cart.calculateTotal(surcharge);
 
             // forward to checkout page and switch to a secure channel
-            // if user switches language
+
+
+        // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
+
             // get language choice
             String language = request.getParameter("language");
 
-            // place the language in request scope
+            // place in request scope
             request.setAttribute("language", language);
 
             String userView = (String) session.getAttribute("view");
 
-            if ((userView != null)
-                    && (!userView.equals("/index"))) {     // index.jsp exists outside 'view' folder
-                // so must be forwarded separately
+            if ((userView != null) &&
+                (!userView.equals("/index"))) {     // index.jsp exists outside 'view' folder
+                                                    // so must be forwarded separately
                 userPath = userView;
             } else {
 
@@ -144,7 +152,6 @@ public class ControllerServlet extends HttpServlet {
                 }
                 return;
             }
-
         }
 
         // use RequestDispatcher to forward request internally
@@ -157,9 +164,9 @@ public class ControllerServlet extends HttpServlet {
         }
     }
 
+
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -170,12 +177,13 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");  // ensures that user input is interpreted as
-        // 8-bit Unicode (e.g., for Czech characters)
+                                                // 8-bit Unicode (e.g., for Czech characters)
 
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         Validator validator = new Validator();
+
 
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
@@ -199,7 +207,8 @@ public class ControllerServlet extends HttpServlet {
 
             userPath = "/category";
 
-            // if updateCart action is called
+
+        // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
 
             // get input from request
@@ -216,7 +225,8 @@ public class ControllerServlet extends HttpServlet {
 
             userPath = "/cart";
 
-            // if purchase action is called
+
+        // if purchase action is called
         } else if (userPath.equals("/purchase")) {
 
             if (cart != null) {
@@ -226,14 +236,12 @@ public class ControllerServlet extends HttpServlet {
                 String email = request.getParameter("email");
                 String phone = request.getParameter("phone");
                 String address = request.getParameter("address");
-                String city = request.getParameter("city");
-                String state = request.getParameter("state");
-                String zipcode = request.getParameter("zipcode");
+                String cityRegion = request.getParameter("cityRegion");
                 String ccNumber = request.getParameter("creditcard");
 
                 // validate user data
                 boolean validationErrorFlag = false;
-                validationErrorFlag = validator.validateForm(name, email, phone, address, city, state, zipcode, ccNumber, request);
+                validationErrorFlag = validator.validateForm(name, email, phone, address, cityRegion, ccNumber, request);
 
                 // if validation error found, return user to checkout
                 if (validationErrorFlag == true) {
@@ -243,7 +251,7 @@ public class ControllerServlet extends HttpServlet {
                     // otherwise, save order to database
                 } else {
 
-                    int orderId = orderManager.placeOrder(name, email, phone, address, city, state, zipcode, ccNumber, cart);
+                    int orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
 
                     // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
@@ -264,7 +272,7 @@ public class ControllerServlet extends HttpServlet {
                         session.invalidate();
 
                         if (!language.isEmpty()) {                       // if user changed language using the toggle,
-                            // reset the language attribute - otherwise
+                                                                         // reset the language attribute - otherwise
                             request.setAttribute("language", language);  // language will be switched on confirmation page!
                         }
 
@@ -279,7 +287,7 @@ public class ControllerServlet extends HttpServlet {
 
                         userPath = "/confirmation";
 
-                        // otherwise, send back to checkout page and display error
+                    // otherwise, send back to checkout page and display error
                     } else {
                         userPath = "/checkout";
                         request.setAttribute("orderFailureFlag", true);
