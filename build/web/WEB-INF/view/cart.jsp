@@ -1,22 +1,13 @@
 <%--
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
-
- * author: tgiunipero
+    Document   : cart
+    Created on : May 20, 2010, 12:20:12 AM
+    Author     : tgiunipero
 --%>
-
 
 <%-- Set session-scoped variable to track the view user is coming from.
      This is used by the language mechanism in the Controller so that
-     users view the same page when switching between English and Czech. --%>
-<c:set var="view" value="/cart" scope="session"/>
-
-
-<%-- HTML markup starts below --%>
-
+     users view the same page when switching between English and Spanish. --%>
+<c:set var='view' value='/cart' scope='session' />
 <div id="singleColumn">
 
     <c:choose>
@@ -68,7 +59,7 @@
     <c:if test="${!empty cart && cart.numberOfItems != 0}">
 
       <h4 id="subtotal"><fmt:message key="subtotal"/>:
-          <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cart.subtotal}"/>
+          <fmt:formatNumber type="currency" currencySymbol="&dollar; " value="${cart.subtotal}"/>
       </h4>
 
       <table id="cartTable">
@@ -86,18 +77,16 @@
 
           <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
             <td>
-                <img src="${initParam.productImagePath}${product.name}.png"
-                     alt="<fmt:message key="${product.name}"/>">
+              <img src="${initParam.productImagePath}${product.name}.jpg"
+                   alt="<fmt:message key="${product.name}"/>" style="height: 60%">
             </td>
 
             <td><fmt:message key="${product.name}"/></td>
 
             <td>
-                <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cartItem.total}"/>
+                 <fmt:formatNumber type="currency" currencySymbol="&dollar; " value="${cartItem.total}"/>
                 <br>
-                <span class="smallText">(
-                    <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/>
-                    / <fmt:message key="unit"/> )</span>
+                <span class="smallText">( <fmt:formatNumber type="currency" currencySymbol="&dollar; " value="${product.price}"/> / <fmt:message key="unit"/> )</span>
             </td>
 
             <td>

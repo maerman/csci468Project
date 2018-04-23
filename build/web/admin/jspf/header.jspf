@@ -35,19 +35,20 @@
              });
         </script>
 
-        <title>The Affable Bean :: Admin Console</title>
+        <title>Ambiance Candles :: Admin Console</title>
     </head>
 
     <body>
         <div id="main">
             <div id="header">
                 <div id="widgetBar"></div>
-
-                <a href="<c:url value='../index.jsp'/>">
-                    <img src="../img/logo.png" alt="Affable Bean logo" id="adminLogo">
-                </a>
-
-                <img src="../img/logoText.png" id="logoText" alt="the affable bean">
+                    <span>
+                        <a href="<c:url value='../index.jsp'/>">  
+                          <h1>Ambiance Candles</h1>
+                          <img src="../img/logo.png" id="logoText" alt="Ambiance Candles" style="height:50%; float: none; margin-left:0px;">
+                        
+                        </a>
+                    </span>
             </div>
 
             <h2>admin console</h2>
