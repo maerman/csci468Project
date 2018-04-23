@@ -21,7 +21,7 @@ import javax.persistence.PersistenceContext;
 public class CustomerFacade extends AbstractFacade<Customer> {
     @PersistenceContext(unitName = "AffableBeanPU")
     private EntityManager em;
-@Override
+
     protected EntityManager getEntityManager() {
         return em;
     }
