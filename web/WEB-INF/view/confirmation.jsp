@@ -1,15 +1,8 @@
 <%--
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
-
- * author: tgiunipero
+    Document   : confirmation
+    Created on : Sep 9, 2009, 12:20:30 AM
+    Author     : tgiunipero
 --%>
-
-
-<%-- HTML markup starts below --%>
 
 <div id="singleColumn">
 
@@ -25,12 +18,10 @@
     </p>
 
     <div class="summaryColumn" >
-
         <table id="orderSummaryTable" class="detailsTable">
             <tr class="header">
                 <th colspan="3"><fmt:message key="orderSummary"/></th>
             </tr>
-
             <tr class="tableHeading">
                 <td><fmt:message key="product"/></td>
                 <td><fmt:message key="quantity"/></td>
@@ -40,14 +31,12 @@
             <c:forEach var="orderedProduct" items="${orderedProducts}" varStatus="iter">
 
                 <tr class="${((iter.index % 2) != 0) ? 'lightBlue' : 'white'}">
-                    <td>
-                        <fmt:message key="${products[iter.index].name}"/>
-                    </td>
+                    <td><fmt:message key="${products[iter.index].name}"/></td>
                     <td class="quantityColumn">
                         ${orderedProduct.quantity}
                     </td>
                     <td class="confirmationPriceColumn">
-                        <fmt:formatNumber type="currency" currencySymbol="&euro; "
+                         <fmt:formatNumber type="currency" currencySymbol="&dollar; "
                                           value="${products[iter.index].price * orderedProduct.quantity}"/>
                     </td>
                 </tr>
@@ -59,27 +48,24 @@
             <tr class="lightBlue">
                 <td colspan="2" id="deliverySurchargeCellLeft"><strong><fmt:message key="surcharge"/>:</strong></td>
                 <td id="deliverySurchargeCellRight">
-                    <fmt:formatNumber type="currency"
-                                      currencySymbol="&euro; "
-                                      value="${initParam.deliverySurcharge}"/></td>
+                    <fmt:formatNumber type="currency" currencySymbol="&dollar;" value="${initParam.deliverySurcharge}"/></td>
             </tr>
 
             <tr class="lightBlue">
                 <td colspan="2" id="totalCellLeft"><strong><fmt:message key="total"/>:</strong></td>
-                <td id="totalCellRight">
-                    <fmt:formatNumber type="currency"
-                                      currencySymbol="&euro; "
+                <td id="totalCellRight"><fmt:formatNumber type="currency"
+                                      currencySymbol="&dollar; "
                                       value="${orderRecord.amount}"/></td>
             </tr>
 
-            <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>
-
+            <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>d
             <tr class="lightBlue">
                 <td colspan="3" id="dateProcessedRow"><strong><fmt:message key="dateProcessed"/>:</strong>
-                    <fmt:formatDate value="${orderRecord.dateCreated}"
-                                    type="both"
-                                    dateStyle="short"
-                                    timeStyle="short"/></td>
+                 <fmt:formatDate value="${orderRecord.dateCreated}"
+                    type="both"
+                    dateStyle="short"
+                    timeStyle="short"/>
+                </td>
             </tr>
         </table>
 
@@ -98,7 +84,7 @@
                     <br>
                     ${customer.address}
                     <br>
-                    <fmt:message key="prague"/> ${customer.cityRegion}
+                    ${customer.city}, ${customer.state} ${customer.zipcode}
                     <br>
                     <hr>
                     <strong><fmt:message key="email"/>:</strong> ${customer.email}
@@ -107,5 +93,6 @@
                 </td>
             </tr>
         </table>
+
     </div>
 </div>

@@ -1,9 +1,6 @@
 /*
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 package validate;
@@ -49,8 +46,11 @@ public class Validator {
                                 String email,
                                 String phone,
                                 String address,
-                                String cityRegion,
+                                String city,
+                                String state,
+                                String zipcode,
                                 String ccNumber,
+                                
                                 HttpServletRequest request) {
 
         boolean errorFlag = false;
@@ -58,7 +58,9 @@ public class Validator {
         boolean emailError;
         boolean phoneError;
         boolean addressError;
-        boolean cityRegionError;
+        boolean cityError;
+        boolean stateError;
+        boolean zipcodeError;
         boolean ccNumberError;
 
         if (name == null
@@ -89,12 +91,28 @@ public class Validator {
             addressError = true;
             request.setAttribute("addressError", addressError);
         }
-        if (cityRegion == null
-                || cityRegion.equals("")
-                || cityRegion.length() > 2) {
+        if (city == null
+                || city.equals("")
+                || city.length() > 20) {
             errorFlag = true;
-            cityRegionError = true;
-            request.setAttribute("cityRegionError", cityRegionError);
+            cityError = true;
+            request.setAttribute("cityError", cityError);
+        }
+        if (state == null
+                || state.equals("")
+                || state.length() > 2
+                || state.length() < 2) {
+            errorFlag = true;
+            stateError = true;
+            request.setAttribute("stateError", stateError);
+        }
+        if (zipcode == null
+                || zipcode.equals("")
+                || zipcode.length() > 5
+                || zipcode.length() < 5) {
+            errorFlag = true;
+            zipcodeError = true;
+            request.setAttribute("zipcodeError", zipcodeError);
         }
         if (ccNumber == null
                 || ccNumber.equals("")

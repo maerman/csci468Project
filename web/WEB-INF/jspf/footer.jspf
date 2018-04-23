@@ -1,23 +1,18 @@
 <%--
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
-
- * author: tgiunipero
+    Document   : footer
+    Created on : May 20, 2010, 12:20:12 AM
+    Author     : tgiunipero
 --%>
-
 
             <div id="footer">
                 <br>
                 <hr id="footerDivider">
                 <p id="footerText" class="reallySmallText">
-                    <a href="<c:url value='#'/>"><fmt:message key="privacy" /></a>
+                    <a href="<c:url value='#'/>">Privacy Policy</a>
                     &nbsp;&nbsp;::&nbsp;&nbsp;
-                    <a href="<c:url value='#'/>"><fmt:message key="contact" /></a>
+                    <a href="<c:url value='#'/>">Contact</a>
                     &nbsp;&nbsp;&copy;&nbsp;&nbsp;
-                    2010 the affable bean</p>
+                    2017 Ambiance Candles</p>
             </div>
         </div>
     </body>
